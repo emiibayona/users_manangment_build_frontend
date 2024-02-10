@@ -1,16 +1,11 @@
 <template>
-  <div>
-    {{ user || "Cargame el user" }}
-    {{ userIsLogged }}
-    <button @click="setUser({ name: 'asd' })">CLICK ME</button>
-  </div>
+  <NuxtPage />
 </template>
-
 <script setup>
-import { onMounted, computed } from "vue";
-import useUser from "@/stores/user";
-const userStore = useUser();
-const { setUser } = userStore;
-const { user, userIsLogged } = storeToRefs(userStore);
-onMounted(() => setUser(null));
+import "./src/index.css";
 </script>
+<style>
+body {
+  margin: 0;
+}
+</style>
