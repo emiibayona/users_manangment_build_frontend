@@ -5,9 +5,9 @@ const VUE_APP_API_NAME = "api/";
 const url = `${VUE_APP_API_URL}:${VUE_APP_API_PORT}/${VUE_APP_API_NAME}`;
 
 export default {
-  get: async (path) => {
+  get: async (path, options) => {
     try {
-      const response = await axios.get(url + path);
+      const response = await axios.get(url + path, options);
       return response.data;
     } catch (error) {
       console.error("GET request error:", error);

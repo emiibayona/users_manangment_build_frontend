@@ -2,6 +2,7 @@ import service from "@/services/AuthService.js";
 import { defineStore } from "pinia";
 import moment from "moment";
 import cookies from "js-cookie";
+import { StoreStatus } from "#imports";
 
 // Token
 const setAuthToken = (_, auth) => {
@@ -39,7 +40,7 @@ const cleanUserInfo = (_) => {
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    user: { value: null, status: "success" },
+    user: { value: null, status: StoreStatus.SUCCESS },
     authorisation: { value: null },
   }),
   actions: {
@@ -56,13 +57,13 @@ export const useAuthStore = defineStore("auth", {
       return res;
     },
     async login(data) {
-      this.user.status = "loading";
+      this.user.status = StoreStatus.LOADING;
       const res = await service.login(data);
 
-      if (res?.status === 200 || res?.status === "success") {
+      if (res?.status === 200 || res?.status === StoreStatus.SUCCESS) {
         setUserInfo(this, res.user);
         setAuthToken(this, res.authorisation);
-        this.user.status = "success";
+        this.user.status = StoreStatus.SUCCESS;
       } else {
         setUserInfo(this, res?.data?.error || res?.data?.errors);
         this.user.status = "error";
@@ -71,14 +72,14 @@ export const useAuthStore = defineStore("auth", {
 
     async logout() {
       const res = await service.logout();
-      if (res.status === "success") {
+      if (res.status === StoreStatus.SUCCESS) {
         cleanUserInfo(this);
         clearAuthToken(this);
       }
     },
     async refreshToken() {
       await service.refresh();
-      if (res.status === "success") {
+      if (res.status === StoreStatus.SUCCESS) {
         setAuthToken(this, res.authorisation);
       }
     },
@@ -89,7 +90,7 @@ export const useAuthStore = defineStore("auth", {
   },
   getters: {
     getUser: (state) => state.user.value,
-    getUserIsLoading: (state) => state.user.status === "loading",
-    errorOnUser: (state) => state.user.status === "error",
+    getUserIsLoading: (state) => state.user.status === StoreStatus.LOADING,
+    errorOnUser: (state) => state.user.status === StoreStatus.ERROR,
   },
 });

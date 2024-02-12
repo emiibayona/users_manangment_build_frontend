@@ -1,14 +1,11 @@
 <template>
-  <div id="page">
-    <Topbar />
+  <div class="w-full">
     <nuxt-child />
   </div>
 </template>
-<script setup>
-import Topbar from "@/components/TopBar.vue";
-</script>
+<script setup></script>
 <style scoped>
-.page {
+/* .page {
   width: 100%;
-}
+} */
 </style>
