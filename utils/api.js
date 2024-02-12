@@ -16,7 +16,6 @@ export default {
   },
   post: async (path, data) => {
     try {
-      // setAuthToken(localStorage.getItem("user_token"));
       const response = await axios.post(url + path, data);
       return response.data;
     } catch (error) {
@@ -26,7 +25,6 @@ export default {
   },
   put: async (path, data) => {
     try {
-      // setAuthToken(localStorage.getItem("user_token"));
       const response = await axios.put(url + path, data);
       return response.data;
     } catch (error) {
@@ -35,5 +33,3 @@ export default {
     }
   },
 };
-
-// module.exports = { setAuthToken, get, post, put };

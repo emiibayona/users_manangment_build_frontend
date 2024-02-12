@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
+import { useLazyFetch } from "#app";
 import { useContactStore } from "@/stores/ContactsStore";
 import ContactsList from "./ContactsList.vue";
 const contactStore = useContactStore();
@@ -19,5 +19,5 @@ const contacts = computed(() => contactStore.getContacts);
 const searchContacts = async function (query) {
   await contactStore.fetchContacts(query);
 };
-onMounted(async () => await contactStore.fetchContacts());
+useLazyFetch(async () => await contactStore.fetchContacts());
 </script>

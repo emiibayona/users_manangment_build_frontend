@@ -7,27 +7,29 @@ import { StoreStatus } from "#imports";
 // Token
 const setAuthToken = (_, auth) => {
   _.authorisation.value = auth;
-  cookies.set("user_token", auth.token);
+  cookies.set("user_auth", JSON.stringify(auth));
 };
 const clearAuthToken = (_) => {
   _.authorisation.value = null;
-  cookies.set("user_token", null);
+  cookies.set("user_auth", null);
 };
 
 const isTokenAlive = (_) => {
-  if (!_.authorisation.value) {
+  const auth =
+    _.authorisation.value || JSON.parse(cookies.get("user_auth") || null);
+  if (!auth) {
     return false;
   }
 
   return (
-    moment(_.authorisation.value.get_time)
-      .add(Number(_.authorisation.value.ttl), "minutes")
-      .toDate() > moment().toDate()
+    moment(auth.get_time).add(Number(auth.ttl), "minutes").toDate() >
+    moment().toDate()
   );
 };
 
 // User
 const setUserInfo = (_, user) => {
+  if (user?.data?.error) return;
   _.user.value = user;
   localStorage?.setItem("email", user?.email);
   localStorage?.setItem("userId", user?.id);
@@ -45,16 +47,7 @@ export const useAuthStore = defineStore("auth", {
   }),
   actions: {
     async loggedUser() {
-      const res = await service.loggedUser();
-      if (res.error) {
-        if (
-          localStorage?.getItem("userId") === this.user?.value?.id &&
-          !isTokenAlive(this)
-        ) {
-          return await this.refreshToken();
-        }
-      }
-      return res;
+      return await service.loggedUser();
     },
     async login(data) {
       this.user.status = StoreStatus.LOADING;
@@ -77,15 +70,10 @@ export const useAuthStore = defineStore("auth", {
         clearAuthToken(this);
       }
     },
-    async refreshToken() {
-      await service.refresh();
-      if (res.status === StoreStatus.SUCCESS) {
-        setAuthToken(this, res.authorisation);
-      }
-    },
     async rehydrateUser() {
       const res = await this.loggedUser();
       setUserInfo(this, res);
+      return res;
     },
   },
   getters: {
