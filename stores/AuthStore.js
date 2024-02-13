@@ -60,6 +60,7 @@ export const useAuthStore = defineStore("auth", {
       } else {
         setUserInfo(this, res?.data?.error || res?.data?.errors);
         this.user.status = "error";
+        this.user.status = StoreStatus.ERROR;
       }
     },
 
@@ -78,6 +79,8 @@ export const useAuthStore = defineStore("auth", {
   },
   getters: {
     getUser: (state) => state.user.value,
+    isLoggedIn: (state) =>
+      state.user.value && state.user.status === StoreStatus.SUCCESS,
     getUserIsLoading: (state) => state.user.status === StoreStatus.LOADING,
     errorOnUser: (state) => state.user.status === StoreStatus.ERROR,
   },

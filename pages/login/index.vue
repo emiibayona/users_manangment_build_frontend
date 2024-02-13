@@ -3,4 +3,6 @@
     <Login />
   </div>
 </template>
-<script setup></script>
+<script setup>
+import Login from "~/components/Login.vue";
+</script>

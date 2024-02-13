@@ -15,7 +15,7 @@ export default {
   },
   update: async function ({ id, body }) {
     return api
-      .get(`contacts/${id}`, body)
+      .put(`contacts/${id}`, body)
       .then((res) => res)
       .catch((res) => res.response);
   },

@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height: {
+        "small-fit": "30px",
+      },
       gap: {
         22: "5.25rem",
       },
@@ -16,17 +19,17 @@ module.exports = {
       screens: {
         sms: { max: "780px" },
       },
-    },
-    fontSize: {
-      "form-label": [
-        "20px",
-        {
-          lineHeight: "27px",
-          letterSpacing: "-0.01em",
-          fontWeight: "700",
-          color: "26355C",
-        },
-      ],
+      fontSize: {
+        "form-label": [
+          "20px",
+          {
+            lineHeight: "27px",
+            letterSpacing: "-0.01em",
+            fontWeight: "700",
+            color: "26355C",
+          },
+        ],
+      },
     },
     colors: {
       purple: "#9378FF",
@@ -37,6 +40,8 @@ module.exports = {
       "grey-1": "#EBEBEB",
       "near-black": "#120E21",
       "red-error": "#FF7979",
+      "pulse-off": "#475569",
+      "pulse-on": "#64748b",
     },
   },
   plugins: [],

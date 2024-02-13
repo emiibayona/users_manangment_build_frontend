@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async (to) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   const app = useNuxtApp();
   const store = useAuthStore(app.$pinia);
   store.rehydrateUser().then((res) => {
@@ -9,7 +9,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     ) {
       return navigateTo("/login");
     }
-
     if (to.fullPath.includes("login")) {
       const ok = to.fullPath.replace("login", "contacts");
       return navigateTo(ok);

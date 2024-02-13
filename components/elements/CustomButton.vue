@@ -1,5 +1,10 @@
 <template>
-  <button id="custom-button" :disabled="disabled" :class="customClasses">
+  <button
+    id="custom-button"
+    :disabled="disabled"
+    :class="customClasses"
+    :style="customStyle"
+  >
     <slot class="text-lg"></slot>
   </button>
 </template>
@@ -10,11 +15,12 @@ const props = defineProps({
   block: { type: Boolean, default: false },
   fit: { type: Boolean, default: false },
   smallFit: { type: Boolean, default: false },
+  customStyle: { type: Object, default: () => {} },
 });
 
 const customClasses = computed(() => {
   const classes = {
-    dimensions: ["w-[260px]", " h-[58px]"],
+    dimensions: ["w-[260px]"],
     borders: ["rounded-l-full rounded-r-full"],
     colors: ["text-white"],
     actions: [],
@@ -34,7 +40,9 @@ const customClasses = computed(() => {
     classes.actions.push("hover:bg-purple-dark", "hover:pointer-events-auto");
   }
   if (props.smallFit) {
-    classes.dimensions.push("h-[30px]", "w-min", "px-4");
+    classes.dimensions.push("h-small-fit", "w-min", "px-4");
+  } else {
+    classes.dimensions.push("h-[58px]");
   }
   Object.values(classes).forEach((x) => (res = [...res, ...x]));
 

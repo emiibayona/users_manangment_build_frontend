@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="relative">
     <Topbar />
-    <NuxtPage />
+    <NuxtPage class="h-[calc(100vh-95px)]" />
     <ModalsContainer />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import { ModalsContainer } from "vue-final-modal";
 
 import Topbar from "@/components/TopBar.vue";
-useSeoMeta({
+useHead({
   title: "Training - Contacts Manager",
 });
 </script>

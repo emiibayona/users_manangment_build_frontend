@@ -13,12 +13,6 @@ export default {
       .then((res) => res)
       .catch((res) => res.response);
   },
-  refresh: async function () {
-    return api
-      .post("auth/refresh")
-      .then((res) => res)
-      .catch((res) => res.response);
-  },
   loggedUser: async () => {
     return api
       .get("auth/user")
