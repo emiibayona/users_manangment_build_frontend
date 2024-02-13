@@ -11,7 +11,7 @@ module.exports = {
         22: "5.25rem",
       },
       gridTemplateColumns: {
-        "3s": "repeat(3, minmax(0, 320px))",
+        "2s": "repeat(2, minmax(0, 320px))",
       },
       screens: {
         sms: { max: "780px" },
@@ -34,7 +34,9 @@ module.exports = {
       "light-pink": "#FBEEFF",
       "darker-pink": "#F0BEFF",
       grey: "#99879D",
+      "grey-1": "#EBEBEB",
       "near-black": "#120E21",
+      "red-error": "#FF7979",
     },
   },
   plugins: [],

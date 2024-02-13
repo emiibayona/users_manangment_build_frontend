@@ -31,23 +31,27 @@
   </div>
 </template>
 <script setup>
+import { useRouter } from "#app";
 import CustomInput from "./elements/CustomInput.vue";
 import CustomButton from "./elements/CustomButton.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useAuthStore } from "@/stores/AuthStore";
 const authStore = useAuthStore();
-
+const router = useRouter();
 const email = ref("");
 const password = ref("");
 const login = async function () {
-  const res = await authStore.login({
+  await authStore.login({
     email: email.value,
     password: password.value,
   });
-  if (authStore?.getUser?.id) {
-    navigateTo(`/contacts/`);
-  }
 };
+const logged = computed(() => authStore?.isLoggedIn);
+watch(logged, () => {
+  if (logged.value) {
+    router.push("/contacts");
+  }
+});
 </script>
 <style scoped lang="scss">
 // #login {

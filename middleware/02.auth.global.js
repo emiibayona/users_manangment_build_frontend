@@ -11,7 +11,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
 
     if (to.fullPath.includes("login")) {
-      return navigateTo(to.fullPath.replace("login", "contacts"));
+      const ok = to.fullPath.replace("login", "contacts");
+      return navigateTo(ok);
     }
     return navigateTo(to.fullPath);
   });

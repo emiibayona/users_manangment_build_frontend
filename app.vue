@@ -2,9 +2,12 @@
   <div>
     <Topbar />
     <NuxtPage />
+    <ModalsContainer />
   </div>
 </template>
 <script setup>
+import { ModalsContainer } from "vue-final-modal";
+
 import Topbar from "@/components/TopBar.vue";
 useSeoMeta({
   title: "Training - Contacts Manager",
