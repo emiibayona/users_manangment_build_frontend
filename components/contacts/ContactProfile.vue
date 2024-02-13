@@ -237,7 +237,7 @@ const fetchContact = async function (id, clean = false) {
     { id: id || route?.params?.id },
     clean
   );
-  console.log("onFetch", res);
+
   if (!res && editionMode.value) {
     router.push("/contacts");
   }
