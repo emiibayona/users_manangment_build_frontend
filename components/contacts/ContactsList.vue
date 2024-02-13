@@ -36,7 +36,7 @@
       </div>
     </div>
     <CustomButton
-      v-if="!showEmptyContacts"
+      v-if="!showEmptyContacts && !isLoading"
       class="absolute bottom-6 right-6 w-[58px] flex flex-row justify-center items-center"
       @click="addContacts"
       ><nuxt-img class="w-[50px] h-[50px]" src="icons/cross-add.png"
